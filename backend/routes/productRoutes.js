@@ -1,7 +1,7 @@
 import express from 'express';
 import Product from '../models/productModel.js';
 import asyncHandler from 'express-async-handler';
-
+//using async handler instead of a try-catch block
 const router = express.Router();
 
 //@desc     Fetch all the products
@@ -26,7 +26,8 @@ router.get(
     if (product) {
       res.json(product);
     } else {
-      res.status(404).json({ message: 'Product not found.' });
+      res.status(404);
+      throw new Error('Product Not Found');
     }
   })
 );

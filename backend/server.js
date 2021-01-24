@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import colors from 'colors';
 import productRoutes from './routes/productRoutes.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 
@@ -15,6 +16,12 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+
+//Showing an error on a route that doesn't exist;
+app.use(notFound);
+
+//Showing an error on a product that doesn't exist and also doesn't match the id format;
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
