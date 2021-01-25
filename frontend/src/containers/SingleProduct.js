@@ -16,7 +16,7 @@ import Loader from '../components/UI/Loader';
 import Message from '../components/Message';
 
 const SingleProduct = ({ history, match }) => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   //using the 'match' props to match the product id with the props from the link (see the App.js <Route/> component)
   //const product = products.find((p) => p._id === match.params.id);
