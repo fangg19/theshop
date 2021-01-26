@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import colors from 'colors';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -11,11 +12,15 @@ connectDB();
 
 const app = express();
 
+//this allows to accept JSON data in the body to get the email and the password;
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('API is running now on nodemon');
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 //Showing an error on a route that doesn't exist;
 app.use(notFound);
