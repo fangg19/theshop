@@ -3,6 +3,41 @@ import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 //using async handler instead of a try-catch block
 
+//@desc     Register a new User
+//@route    POST /api/users
+//@access   Public
+const registerUser = asyncHandler(async (req, res) => {
+  //first we send the data to the body via a submit button on a form on front-end and the we access the data we send with req.body here in the backend;
+  const { name, email, password } = req.body;
+
+  //checking if the user exists and also if the entered password by the user is equal to the encrypted one we have in the database
+  const userExists = await User.findOne({ email: email });
+
+  if (userExists) {
+    res.status(400);
+    throw new Error('User already exists.');
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data.');
+  }
+});
+
 //@desc     Authenticate the user and get a token
 //@route    POST /api/users/login
 //@access   Public
@@ -46,4 +81,4 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile };
+export { authUser, getUserProfile, registerUser };
