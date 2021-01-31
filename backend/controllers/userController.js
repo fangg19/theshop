@@ -1,5 +1,6 @@
 import User from '../models/userModel.js';
 import asyncHandler from 'express-async-handler';
+import generateToken from '../utils/generateToken.js';
 //using async handler instead of a try-catch block
 
 //@desc     Authenticate the user and get a token
@@ -17,7 +18,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: null,
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);
@@ -25,4 +26,24 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser };
+//@desc     get the user profile
+//@route    GET /api/users/profile
+//@access   Private
+const getUserProfile = asyncHandler(async (req, res) => {
+  //checking if the user exists and also if the entered password by the user is equal to the encrypted one we have in the database
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Use not found!');
+  }
+});
+
+export { authUser, getUserProfile };
