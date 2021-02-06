@@ -25,5 +25,13 @@ export const login = (email, password) => async (dispatch) => {
     });
 
     localStorage.setItem('userInfo', JSON.stringify(data));
-  } catch (error) {}
+  } catch (error) {
+    dispatch({
+      type: actionType.USER_LOGIN_FAIL,
+      payload:
+        error.message && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
