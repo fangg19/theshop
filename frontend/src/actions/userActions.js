@@ -21,6 +21,7 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({
       type: actionType.USER_LOGIN_SUCCESS,
+      //The data that gets back from the response of the axios.post function above;
       payload: data,
     });
 
@@ -108,6 +109,41 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: actionType.USER_DETAILS_FAIL,
+
+      payload:
+        error.message && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: actionType.USER_UPDATE_PROFILE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/users/profile`, user, config);
+
+    dispatch({
+      type: actionType.USER_UPDATE_PROFILE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionType.USER_UPDATE_PROFILE_FAIL,
+
       payload:
         error.message && error.response.data.message
           ? error.response.data.message

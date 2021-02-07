@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/UI/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 
 const Profile = ({ history }) => {
   const [name, setName] = useState('');
@@ -21,6 +21,9 @@ const Profile = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
@@ -32,20 +35,32 @@ const Profile = ({ history }) => {
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    //DISPATCH UPDATE PROFILE
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+    } else {
+      //DISPATCH UPDATE PROFILE
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          password,
+        })
+      );
+    }
   };
 
   return (
     <Row>
-      <Col md={3}>
+      <Col md={4}>
         <h2>User Profile</h2>
         {message && <Message variant="warning">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
+        {success && <Message variant="success">Profile updated.</Message>}
         {loading && <Loader />}
 
         <Form onSubmit={submitHandler}>
@@ -70,7 +85,7 @@ const Profile = ({ history }) => {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>New Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter your password"
@@ -80,7 +95,7 @@ const Profile = ({ history }) => {
           </Form.Group>
 
           <Form.Group controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>Confirm New Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Confirm your password"
@@ -94,7 +109,7 @@ const Profile = ({ history }) => {
           </Button>
         </Form>
       </Col>
-      <Col md={9}>
+      <Col md={8}>
         <h2>My Orders</h2>
       </Col>
     </Row>
