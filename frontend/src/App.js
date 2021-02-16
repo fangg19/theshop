@@ -3,16 +3,16 @@ import Header from './components/UI/Header';
 import Footer from './components/UI/Footer';
 import SingleProduct from './containers/SingleProduct';
 import Home from './containers/Home';
-import Cart from './containers/Cart';
 import Login from './containers/Login';
 import Register from './containers/Register';
 import Profile from './containers/Profile';
+import Cart from './containers/Cart';
 import Shipping from './containers/Shipping';
-import PlaceOrder from './containers/PlaceOrder';
 import PaymentMethod from './containers/PaymentMethod';
+import PlaceOrder from './containers/PlaceOrder';
+import Order from './containers/Order';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Order from './containers/Order';
 
 const App = () => {
   return (
