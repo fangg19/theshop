@@ -80,3 +80,30 @@ export const orderPayReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const orderHistoryReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case actionType.ORDER_HISTORY_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case actionType.ORDER_HISTORY_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
+
+    case actionType.ORDER_HISTORY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case actionType.ORDER_HISTORY_RESET:
+      return { orders: [] };
+
+    default:
+      return state;
+  }
+};
