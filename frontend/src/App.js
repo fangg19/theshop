@@ -12,6 +12,7 @@ import PlaceOrder from './containers/PlaceOrder';
 import PaymentMethod from './containers/PaymentMethod';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Order from './containers/Order';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/payment" component={PaymentMethod} />
           <Route path="/shipping" component={Shipping} />
           <Route path="/placeorder" component={PlaceOrder} />
+          <Route path="/order/:id" component={Order} />
         </Container>
       </main>
       <Footer />
