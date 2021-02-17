@@ -14,6 +14,7 @@ import Order from './containers/Order';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import UserList from './containers/UserList';
+import UserEdit from './containers/UserEdit';
 
 const App = () => {
   return (
@@ -22,10 +23,11 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path="/" component={Home} exact />
-          <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           <Route path="/admin/userlist" component={UserList} />
+          <Route path="/admin/user/:id/edit" component={UserEdit} />
           <Route path="/product/:id" component={SingleProduct} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path="/payment" component={PaymentMethod} />
