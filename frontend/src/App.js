@@ -13,6 +13,7 @@ import PlaceOrder from './containers/PlaceOrder';
 import Order from './containers/Order';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import UserList from './containers/UserList';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/profile" component={Profile} />
+          <Route path="/admin/userlist" component={UserList} />
           <Route path="/product/:id" component={SingleProduct} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path="/payment" component={PaymentMethod} />
