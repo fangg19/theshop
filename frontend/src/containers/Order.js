@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { Row, Col, Image, ListGroup, Card } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/UI/Loader';
-import { getOrderDetails, payOrder } from '../actions/orderActions';
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from '../actions/orderActions';
 import * as actionType from '../constants/actionTypes';
 
-const Order = ({ match }) => {
+const Order = ({ match, history }) => {
   const orderId = match.params.id;
   const dispatch = useDispatch();
 
@@ -21,6 +25,12 @@ const Order = ({ match }) => {
   const orderPay = useSelector((state) => state.orderPay);
   const { success: successPay, loading: loadingPay } = orderPay;
 
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   //Grab the last order if the id's don't match
   useEffect(() => {
     if (!order || order._id !== orderId) {
@@ -30,6 +40,9 @@ const Order = ({ match }) => {
 
   //PayPal script and getting the order details first + once again after the payment is done
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
     //Dynamically adding the PayPal script
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal');
@@ -43,8 +56,9 @@ const Order = ({ match }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay) {
+    if (!order || successPay || successDeliver) {
       dispatch({ type: actionType.ORDER_PAY_RESET });
+      dispatch({ type: actionType.ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -53,7 +67,7 @@ const Order = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, order, successPay]);
+  }, [dispatch, orderId, order, successPay, successDeliver, history]);
 
   if (!loading) {
     //Calculate Prices
@@ -69,6 +83,10 @@ const Order = ({ match }) => {
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
+  };
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
   };
 
   return loading ? (
@@ -100,10 +118,10 @@ const Order = ({ match }) => {
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  Order delivered on: {order.deliveredAt}
+                  Order shipped on: {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant="danger">Order is not delivered.</Message>
+                <Message variant="danger">Order is not shipped.</Message>
               )}
             </ListGroup.Item>
 
@@ -124,7 +142,6 @@ const Order = ({ match }) => {
 
             <ListGroup.Item>
               <h2>Order Items: </h2>
-
               {order.orderItems.length === 0 ? (
                 <Message>You have no items on your order</Message>
               ) : (
@@ -202,6 +219,22 @@ const Order = ({ match }) => {
                   )}
                 </ListGroup.Item>
               )}
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      variant="info"
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverHandler}
+                    >
+                      Mark as shipped
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

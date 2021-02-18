@@ -32,7 +32,6 @@ const OrderList = ({ history }) => {
   //   }
   // };
 
-  const orderDeliveredHandler = (id) => {};
   return (
     <>
       <h1>Orders</h1>
@@ -47,9 +46,9 @@ const OrderList = ({ history }) => {
               <th>ORDER ID</th>
               <th>DATE</th>
               <th>TOTAL PRICE</th>
-              <th>PAID </th>
-              <th>DELIVERED</th>
-              <th>MARK AS DELIVERED</th>
+              <th>PAID AT</th>
+              <th>SHIPPED AT</th>
+              <th>DETAILS</th>
             </tr>
           </thead>
           <tbody>
