@@ -110,6 +110,7 @@ const SingleProduct = ({ history, match }) => {
                 )}
                 <ListGroup.Item>
                   <Button
+                    variant="success"
                     className="btn-block"
                     type="button"
                     disabled={product.countInStock === 0}

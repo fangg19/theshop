@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import UserList from './containers/UserList';
 import UserEdit from './containers/UserEdit';
 import ProductList from './containers/ProductList';
+import ProductEdit from './containers/ProductEdit';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/profile" component={Profile} />
           <Route path="/admin/userlist" component={UserList} />
           <Route path="/admin/user/:id/edit" component={UserEdit} />
+          <Route path="/admin/product/:id/edit" component={ProductEdit} />
           <Route path="/product/:id" component={SingleProduct} />
           <Route path="/admin/productlist" component={ProductList} />
           <Route path="/cart/:id?" component={Cart} />
