@@ -15,6 +15,7 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import UserList from './containers/UserList';
 import UserEdit from './containers/UserEdit';
+import ProductList from './containers/ProductList';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/admin/userlist" component={UserList} />
           <Route path="/admin/user/:id/edit" component={UserEdit} />
           <Route path="/product/:id" component={SingleProduct} />
+          <Route path="/admin/productlist" component={ProductList} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path="/payment" component={PaymentMethod} />
           <Route path="/shipping" component={Shipping} />
