@@ -17,6 +17,7 @@ import UserList from './containers/UserList';
 import UserEdit from './containers/UserEdit';
 import ProductList from './containers/ProductList';
 import ProductEdit from './containers/ProductEdit';
+import OrderList from './containers/OrderList';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/shipping" component={Shipping} />
           <Route path="/placeorder" component={PlaceOrder} />
           <Route path="/order/:id" component={Order} />
+          <Route path="/admin/orderlist" component={OrderList} />
         </Container>
       </main>
       <Footer />
