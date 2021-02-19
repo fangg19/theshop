@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import ProductCard from '../components/ProductCard';
+import ProductCarousel from '../components/UI/ProductCarousel';
 import { listProducts } from '../actions/productActions';
 import Message from '../components/Message';
 import Loader from '../components/UI/Loader';
@@ -33,7 +34,8 @@ const Home = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
-    <div>
+    <>
+      {!keyword && <ProductCarousel />}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -54,7 +56,7 @@ const Home = ({ match }) => {
           />
         </>
       )}
-    </div>
+    </>
   );
 };
 
