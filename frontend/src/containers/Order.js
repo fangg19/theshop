@@ -67,7 +67,7 @@ const Order = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, order, successPay, successDeliver, history]);
+  }, [dispatch, orderId, order, successPay, successDeliver, userInfo, history]);
 
   if (!loading) {
     //Calculate Prices
