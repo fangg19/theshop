@@ -1,6 +1,6 @@
 # 🛍 THE SHOP 🛍
 
-#### A **MERN** eCommerce website following [Brad Traversy's](https://www.udemy.com/course/mern-ecommerce/) tutorial.
+#### A **MERN** eCommerce website following Brad Traversy's [tutorial](https://www.udemy.com/course/mern-ecommerce/).
 
 I can't recommend enough this course to learn and develop more on your ReactJS skills. Following this I developed a fully functional online shopping platform which includes:
 
