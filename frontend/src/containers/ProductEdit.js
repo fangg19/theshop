@@ -106,7 +106,7 @@ const ProductEdit = ({ match, history }) => {
 
   return (
     <>
-      <Link to="/admin/productlist" className="btn light my-e">
+      <Link to="/admin/productlist" className="btn btn-light my-e">
         Go back to all products.
       </Link>
       <FormContainer>

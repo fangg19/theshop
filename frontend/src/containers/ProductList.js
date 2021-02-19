@@ -79,7 +79,7 @@ const ProductList = ({ history, match }) => {
           <Button
             className="my-3"
             onClick={createProductHandler}
-            variant="success"
+            variant="primary"
           >
             <i className="fas fa-plus" style={{ marginRight: '8px' }} />
             Create Product
@@ -119,7 +119,7 @@ const ProductList = ({ history, match }) => {
                   <td>{product.countInStock}</td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                      <Button variant="info" className="btn-sm mr-3">
+                      <Button variant="outline-info" className="btn-sm mr-3">
                         EDIT
                       </Button>
                     </LinkContainer>

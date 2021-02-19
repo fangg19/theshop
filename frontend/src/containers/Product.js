@@ -18,6 +18,7 @@ import Rating from '../components/Rating';
 import Loader from '../components/UI/Loader';
 import Message from '../components/Message';
 import * as actionType from '../constants/actionTypes';
+import Meta from '../components/Meta';
 
 const Product = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -72,6 +73,7 @@ const Product = ({ history, match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
@@ -118,7 +120,7 @@ const Product = ({ history, match }) => {
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
-                        <Col>Qty</Col>
+                        <Col>Quantity</Col>
                         <Col>
                           <Form.Control
                             as="select"

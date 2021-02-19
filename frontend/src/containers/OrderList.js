@@ -74,7 +74,7 @@ const OrderList = ({ history }) => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}/edit`}>
-                    <Button variant="info" className="btn-sm mr-3">
+                    <Button variant="outline-info" className="btn-sm mr-3">
                       Details
                     </Button>
                   </LinkContainer>

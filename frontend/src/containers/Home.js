@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ProductCarousel from '../components/UI/ProductCarousel';
 import { listProducts } from '../actions/productActions';
 import Message from '../components/Message';
 import Loader from '../components/UI/Loader';
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta';
 
 const Home = ({ match }) => {
   //Setting the state locally
@@ -35,7 +37,14 @@ const Home = ({ match }) => {
 
   return (
     <>
-      {!keyword && <ProductCarousel />}
+      <Meta />
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go back to homepage
+        </Link>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (

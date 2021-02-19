@@ -129,7 +129,7 @@ const Profile = ({ history }) => {
                 <th>TOTAL</th>
                 <th>PAID</th>
                 <th>DELIVERED</th>
-                <th></th>
+                <th>DETAILS</th>
               </tr>
             </thead>
             <tbody>
@@ -154,7 +154,7 @@ const Profile = ({ history }) => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button className="btn-sm" variant="light">
+                      <Button className="btn-sm" variant="outline-info">
                         Details
                       </Button>
                     </LinkContainer>

@@ -66,7 +66,7 @@ const UserList = ({ history }) => {
                 </td>
                 <td>
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant="info" className="btn-sm mr-3">
+                    <Button variant="outline-info" className="btn-sm mr-3">
                       EDIT
                     </Button>
                   </LinkContainer>
