@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/UI/Header';
 import Footer from './components/UI/Footer';
-import SingleProduct from './containers/SingleProduct';
+import Product from './containers/Product';
 import Home from './containers/Home';
 import Login from './containers/Login';
 import Register from './containers/Register';
@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/admin/userlist" component={UserList} />
           <Route path="/admin/user/:id/edit" component={UserEdit} />
           <Route path="/admin/product/:id/edit" component={ProductEdit} />
-          <Route path="/product/:id" component={SingleProduct} />
+          <Route path="/product/:id" component={Product} />
           <Route path="/admin/productlist" component={ProductList} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path="/payment" component={PaymentMethod} />
