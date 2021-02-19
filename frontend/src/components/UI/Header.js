@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { logout } from '../../actions/userActions';
 import SearchBox from './SearchBox';
+import * as actionType from '../../constants/actionTypes';
 
 const Header = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -15,6 +16,10 @@ const Header = ({ history }) => {
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  // useEffect(() => {
+  //   dispatch({ type: actionType.CART_RESET_ITEM });
+  // }, [dispatch, logoutHandler]);
 
   return (
     <header>

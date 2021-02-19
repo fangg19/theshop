@@ -43,6 +43,8 @@ export const cartReducer = (
       };
     }
 
+    case actionType.CART_RESET_ITEM:
+      return { cartItems: [] };
     default:
       return state;
   }

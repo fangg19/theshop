@@ -82,7 +82,7 @@ const ProductList = ({ history, match }) => {
             variant="primary"
           >
             <i className="fas fa-plus" style={{ marginRight: '8px' }} />
-            Create Product
+            Add Product
           </Button>
         </Col>
       </Row>
