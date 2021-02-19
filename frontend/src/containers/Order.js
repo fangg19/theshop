@@ -226,7 +226,7 @@ const Order = ({ match, history }) => {
                 !order.isDelivered && (
                   <ListGroup.Item>
                     <Button
-                      variant="info"
+                      variant="success"
                       type="button"
                       className="btn btn-block"
                       onClick={deliverHandler}
