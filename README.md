@@ -1,4 +1,4 @@
-# 🛍 THE SHOP 🛍
+# 🛍 eCommerce SHOP 🛍
 
 #### A **MERN** eCommerce website following Brad Traversy's [tutorial](https://www.udemy.com/course/mern-ecommerce/).
 
